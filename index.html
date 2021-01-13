@@ -22,7 +22,7 @@
                 </div>
                 <div v-else><strong>1.Titolo:</strong> {{movie.title}}; <br></div>
                 <strong>3.Lingua:</strong> {{movie.original_language}}; <br>
-                <strong>4.Voto:</strong> <span v-for="(movie, index, vote_average) in movies"></span>
+                <strong>4.Voto:</strong> <span>{{(Math.ceil(movie.vote_average/2))}}</span>
             </li>
             <!-- Serie Tv -->
             <li v-for="serie in seriesTv" class="serietv">
