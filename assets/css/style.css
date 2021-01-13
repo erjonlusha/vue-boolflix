@@ -1,6 +1,6 @@
-#app{max-width: 1440px;}
+/* #app{max-width: 1440px;} */
 ul li{
-    width: calc(93%/3);
+    width: calc(90%/5);
     height: 300px;
     list-style: none;
     margin: 5px;
@@ -9,8 +9,13 @@ ul li{
     border: 7px double rebeccapurple;
     border-radius: 10px;
 }
-
-img{
-    height : 250px;
-    max-width: 300px ;
+.back_img{
+    height : 200px;
+    max-width: 133px ;
+    background-color: rebeccapurple;
 }
+img{
+    height : 200px;;
+}
+
+.serietv{border-color: royalblue;}

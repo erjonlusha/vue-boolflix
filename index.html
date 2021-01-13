@@ -3,22 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BoolFlix</title>
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <div id="app">
         <label for="text">Cerca Film</label><input type="text" v-model="search" v-on:keyup.enter="submit">
         <ul>
+            <!-- Movies -->
             <li v-for="movie in movies">
                 <div v-if="(movie.original_title !== movie.title)">
-                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="">
+                    <img v-if="movie.poster_path == null || !movie.poster_path" :src="imgNonDisponibile" alt="">
+                    <img v-else :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="">
+                    {{movie.poster_path}}
                     <strong>1.Titolo:</strong> {{movie.title}}; <br>
                     <strong>2.Titolo Originale:</strong> {{movie.original_title}}; <br>
                 </div>
                 <div v-else><strong>1.Titolo:</strong> {{movie.title}}; <br></div>
                 <strong>3.Lingua:</strong> {{movie.original_language}}; <br>
-                <strong>4.Voto:</strong> {{movie.vote_average}}
+                <strong>4.Voto:</strong> <span v-for="(movie, index, vote_average) in movies"></span>
+            </li>
+            <!-- Serie Tv -->
+            <li v-for="serie in seriesTv" class="serietv">
+                <div v-if="(serie.original_name !== serie.name)">
+                    <img v-if="serie.poster_path == null" :src="imgNonDisponibile" alt="">
+                    <img v-else :src="'https://image.tmdb.org/t/p/w500/' + serie.poster_path" alt="">
+                    <strong>1.Titolo:</strong> {{serie.name}}; <br>
+                    <strong>2.Titolo Originale:</strong> {{serie.original_name}}; <br>
+                </div>
+                <div v-else><strong>1.Titolo:</strong> {{serie.name}}; <br></div>
+                <strong>3.Lingua:</strong> {{serie.original_language}}; <br>
+                <strong>4.Voto:</strong> <span>{{(Math.ceil(serie.vote_average/2))}}</span>
             </li>
         </ul>
     </div>
