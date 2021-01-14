@@ -1,0 +1,23 @@
+/* #app{max-width: 1440px;} */
+ul li{
+    width: calc(90%/5);
+    height: 300px;
+    list-style: none;
+    margin: 5px;
+    padding: 30px 0 18px 9px;
+    float: left;
+    border: 7px double rebeccapurple;
+    border-radius: 10px;
+}
+.back_img{
+    height : 150px;
+    max-width: 133px ;
+    background-color: rebeccapurple;
+}
+.cover_img{
+    height : 150px;;
+}
+
+.serietv{border-color: royalblue;}
+.fa-star{font-size: small;}
+.fas.fa-star{color: rgb(255, 196, 0);}
