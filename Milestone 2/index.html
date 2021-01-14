@@ -4,37 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BoolFlix</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <div id="app">
         <label for="text">Cerca Film</label><input type="text" v-model="search" v-on:keyup.enter="submit">
+	<button @click="submit">Cerca</button>
         <ul>
             <!-- Movies -->
             <li v-for="movie in movies">
                 <div v-if="(movie.original_title !== movie.title)">
-                    <img v-if="movie.poster_path == null || !movie.poster_path" :src="imgNonDisponibile" alt="">
-                    <img v-else :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="">
-                    {{movie.poster_path}}
                     <strong>1.Titolo:</strong> {{movie.title}}; <br>
                     <strong>2.Titolo Originale:</strong> {{movie.original_title}}; <br>
                 </div>
                 <div v-else><strong>1.Titolo:</strong> {{movie.title}}; <br></div>
-                <strong>3.Lingua:</strong> {{movie.original_language}}; <br>
-                <strong>4.Voto:</strong> <span>{{(Math.ceil(movie.vote_average/2))}}</span>
+                
+                <strong>3.Lingua:</strong> 
+                <img class="flag_img" :src="getFlag(movie.original_language)" alt=""> <br>{{movie.original_language}};
+                <strong>4.Voto:</strong>
+                <span>
+                    <i v-for="movie in getRate(movie.vote_average)" class="fas fa-star"></i>
+                    <i v-for="movie in (5-getRate(movie.vote_average))" class="far fa-star"></i>
+                </span>
             </li>
             <!-- Serie Tv -->
             <li v-for="serie in seriesTv" class="serietv">
-                <div v-if="(serie.original_name !== serie.name)">
-                    <img v-if="serie.poster_path == null" :src="imgNonDisponibile" alt="">
-                    <img v-else :src="'https://image.tmdb.org/t/p/w500/' + serie.poster_path" alt="">
+               <div v-if="(serie.original_name !== serie.name)">
                     <strong>1.Titolo:</strong> {{serie.name}}; <br>
                     <strong>2.Titolo Originale:</strong> {{serie.original_name}}; <br>
                 </div>
                 <div v-else><strong>1.Titolo:</strong> {{serie.name}}; <br></div>
-                <strong>3.Lingua:</strong> {{serie.original_language}}; <br>
-                <strong>4.Voto:</strong> <span>{{(Math.ceil(serie.vote_average/2))}}</span>
+
+                <strong>3.Lingua:</strong> 
+                <img class="flag_img" :src="getFlag(serie.original_language)" alt=""> <br>
+                <span>{{serie.original_language}};</span>
+                <strong>4.Voto:</strong>
+                <span>
+                    <i v-for="serie in getRate(serie.vote_average)" class="fas fa-star"></i>
+                    <i v-for="serie in (5-getRate(serie.vote_average))" class="far fa-star"></i>
+                </span>
             </li>
         </ul>
     </div>

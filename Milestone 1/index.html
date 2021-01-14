@@ -10,10 +10,10 @@
 <body>
     <div id="app">
         <label for="text">Cerca Film</label><input type="text" v-model="search" v-on:keyup.enter="submit">
+	<button @click="submit">Cerca</button>
         <ul>
             <li v-for="movie in movies">
                 <div v-if="(movie.original_title !== movie.title)">
-                    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="">
                     <strong>1.Titolo:</strong> {{movie.title}}; <br>
                     <strong>2.Titolo Originale:</strong> {{movie.original_title}}; <br>
                 </div>
