@@ -10,48 +10,78 @@
 </head>
 <body>
     <div id="app">
-        <label for="text">Cerca Film</label><input type="text" v-model="search" v-on:keyup.enter="submit">
-        <ul>
-            <!-- Movies -->
-            <li v-for="movie in movies">
-                <span v-if="movie.poster_path"><img class="cover_img"   :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"alt=""></span>
-                <span v-else><img class="cover_img" :src="imgNonDisponibile" alt=""></span>
+        <header>
+            <img class="logo" src="assets/img/boolflix.png">
+            <input  class="searchbar" type="text" v-model="search" v-on:keyup.enter="submit" placeholder="Cerca">
+        </header>
+        <main>
+            <ul>
+                <!-- Movies -->
+                <li v-for="movie in movies">
+                    <strong></strong>
+                    <span v-if="movie.poster_path"><img class="cover_img"   :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path"alt=""></span>
+                    <span v-else><img class="cover_img" :src="imgNonDisponibile" alt=""></span>
+                    <div class="layover">
+                        <div class="titolo_card">
+                            <div v-if="(movie.original_title !== movie.title)">
+                                <strong>Titolo:</strong> {{movie.title}} <br>
+                                <strong>Titolo Originale:</strong> {{movie.original_title}} <br>
+                            </div>
+                            <div v-else><strong>Titolo:</strong> {{movie.title}} <br></div>
+                        </div>
 
-                <div v-if="(movie.original_title !== movie.title)">
-                    <strong>1.Titolo:</strong> {{movie.title}}; <br>
-                    <strong>2.Titolo Originale:</strong> {{movie.original_title}}; <br>
-                </div>
-                <div v-else><strong>1.Titolo:</strong> {{movie.title}}; <br></div>
-                
-                <strong>3.Lingua:</strong> 
-                <img class="flag_img" :src="getFlag(movie.original_language)" alt=""> <br>{{movie.original_language}};
-                <strong>4.Voto:</strong>
-                <span>
-                    <i v-for="movie in getRate(movie.vote_average)" class="fas fa-star"></i>
-                    <i v-for="movie in (5-getRate(movie.vote_average))" class="far fa-star"></i>
-                </span>
-            </li>
-            <!-- Serie Tv -->
-            <li v-for="serie in seriesTv" class="serietv">
-                <span v-if="serie.poster_path"><img class="cover_img" :src="'https://image.tmdb.org/t/p/w500/' + serie.poster_path"alt=""></span>
-                <span v-else><img class="cover_img" :src="imgNonDisponibile" alt=""></span>
-                
-                <div v-if="(serie.original_name !== serie.name)">
-                    <strong>1.Titolo:</strong> {{serie.name}}; <br>
-                    <strong>2.Titolo Originale:</strong> {{serie.original_name}}; <br>
-                </div>
-                <div v-else><strong>1.Titolo:</strong> {{serie.name}}; <br></div>
+                        <div class="lingua">
+                            <strong>Lingua:</strong> 
+                            <span class="lingua">{{movie.original_language}}</span>
+                            <img class="flag_img" :src="getFlag(movie.original_language)" alt=""> <br>
+                        </div>
 
-                <strong>3.Lingua:</strong> 
-                <img class="flag_img" :src="getFlag(serie.original_language)" alt=""> <br>
-                <span>{{serie.original_language}};</span>
-                <strong>4.Voto:</strong>
-                <span>
-                    <i v-for="serie in getRate(serie.vote_average)" class="fas fa-star"></i>
-                    <i v-for="serie in (5-getRate(serie.vote_average))" class="far fa-star"></i>
-                </span>
-            </li>
-        </ul>
+                        <div class="voto">
+                            <strong>Voto:</strong>
+                            <span>
+                                <i v-for="movie in getRate(movie.vote_average)" class="fas fa-star"></i><i v-for="movie in (5-getRate(movie.vote_average))" class="far fa-star"></i>
+                            </span>
+                        </div>
+
+                        <div class="overview">
+                            {{movie.overview}}
+                        </div>
+                    </div>
+                </li>
+                <!-- Serie Tv -->
+                <li v-for="serie in seriesTv" class="serietv">
+                    <span v-if="serie.poster_path"><img class="cover_img" :src="'https://image.tmdb.org/t/p/w342/' + serie.poster_path"alt=""></span>
+                    <span v-else><img class="cover_img" :src="imgNonDisponibile" alt=""></span>
+                    
+                    <div class="layover">
+                        <div class="titolo_card">
+                            <div v-if="(serie.original_name !== serie.name)">
+                                <strong>Titolo:</strong> {{serie.name}} <br>
+                                <strong>Titolo Originale:</strong> {{serie.original_name}} <br>
+                            </div>
+                            <div v-else><strong>Titolo:</strong> {{serie.name}} <br></div>
+                        </div>
+
+                        <div class="lingua">
+                            <strong>Lingua:</strong> 
+                            <span class="lingua">{{serie.original_language}}</span>
+                            <img class="flag_img" :src="getFlag(serie.original_language)" alt=""><br>
+                        </div>
+
+                        <div class="voto">
+                            <strong>Voto:</strong>
+                            <span>
+                                <i v-for="serie in getRate(serie.vote_average)" class="fas fa-star"></i><i v-for="serie in (5-getRate(serie.vote_average))" class="far fa-star"></i>
+                            </span>
+                        </div>
+
+                        <div class="overview">
+                            {{serie.overview}}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </main>
     </div>
     <!-- Js & Vue & Axios-->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -2,12 +2,9 @@
 Milestone 4:
 Trasformiamo quello che abbiamo fatto fino ad ora in una vera e propria webapp,
 creando un layout completo simil-Netflix:
-● Un header che contiene logo e search bar
-● Dopo aver ricercato qualcosa nella searchbar, i risultati appaiono sotto forma
-di “card” in cui lo sfondo è rappresentato dall’immagine di copertina (consiglio
-la poster_path con w342)
-● Andando con il mouse sopra una card (on hover), appaiono le informazioni
-aggiuntive già prese nei punti precedenti più la overview*/
+    ●Un header che contiene logo e search bar
+    ●Andando con il mouse sopra una card (on hover), appaiono le informazioni aggiuntive già prese nei punti precedenti più la overview
+    ●Dopo aver ricercato qualcosa nella searchbar, i risultati appaiono sotto formadi “card” in cui lo sfondo è rappresentato dall’immagine di copertina (​consigliola poster_path con w342​)
 
 */
 // https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher   SEARCH API
@@ -80,11 +77,11 @@ let app = new Vue ({
         },
     
         getRate(voto){
-            let rate = Math.round(voto/2);
+            let rate = Math.round(voto/2);// CERCARE PROPRIETà MATH E TROVARE LA PROPRIETA CHE DA SOLO IL DECIMALE
             return rate;
         },
-        getFlag(lang){ 
-            return `https://www.countryflags.io/${lang}/shiny/32.png` 
+        getFlag(lang){ //CERCARE COMBINAZIONE TRA en(lingua) E GB(paese) 
+            return `https://www.countryflags.io/${lang}/shiny/32.png` //{if ${lang} == en or ja or zh}
         }
     }
 
